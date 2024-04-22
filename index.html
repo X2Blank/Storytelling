@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Visualizations</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            width: 600px;
+            /* Set the desired width */
+            margin: 0 auto;
+            /* Center align the container */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Storytelling via data visualizations: My Screen Time Analysis
+        </h1>
+        <h1>within the last week (April 14th - 20th).</h1>
+    </header>
+    <main>
+        <section id="bar-chart">
+            <h2>My Daily Screen Time on Different Apps/Websites.</h2>
+            <p>This bar chart here shows my daily screen time on my top 5 used apps within the last week.</p>
+            <p>And as you can see TikTok is apparently my most used app of the week.</p>
+            <div class="chart-container">
+                <canvas id="bar-chart-canvas" width="600" height="400"></canvas>
+            </div>
+        </section>
+        <section id="pie-chart">
+            <h2>My Distribution of Screen Time across Categories (In Minutes).</h2>
+            <p>This pie chart displays the distribution of my screen time across the 3 categories shown on the screen time in the settings on my iPhone such as</p>
+            <p>social, productivity & finance, and entertainment.</p>
+            <div class="chart-container">
+                <canvas id="pie-chart-canvas" width="600" height="400"></canvas>
+            </div>
+        </section>
+        <section id="line-graph">
+            <h2>My Trend of Screen Time over the Course of the Week (In Minutes).</h2>
+            <p>This line graph illustrates the trend of my screen time over the course of the week, from April 14th to April 20th.</p>
+            <p>As for the reason I have a lot of screen time is when I wake up, I just sit in bed scrolling through my phone.</p>
+            <div class="chart-container">
+                <canvas id="line-graph-canvas" width="600" height="400"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Bar chart data
+        var barChartData = {
+            labels: ["Discord", "Instagram", "TikTok", "Safari", "Spotify"],
+            datasets: [{
+                label: 'Daily Screen Time (In minutes)',
+                backgroundColor: ['rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)', 'rgba(75, 192, 192, 0.5)', 'rgba(153, 102, 255, 0.5)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'],
+                borderWidth: 1,
+                data: [245, 178, 597, 84, 32] // Sample data
+            }]
+        };
+
+        // Bar chart options
+        var barChartOptions = {
+            maintainAspectRatio: false, // Set to false to allow resizing
+            responsive: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        };
+
+        // Get the canvas element
+        var barChartCanvas = document.getElementById('bar-chart-canvas').getContext('2d');
+
+        // Create the bar chart
+        var barChart = new Chart(barChartCanvas, {
+            type: 'bar',
+            data: barChartData,
+            options: barChartOptions
+        });
+
+        // Pie chart data
+        var pieChartData = {
+            labels: ['Social', 'Productivity & Finace', 'Entertainment'],
+            datasets: [{
+                data: [1106, 94, 44], // Sample data
+                backgroundColor: ['#c416c1', '#51dbbb', '#FFCE56']
+            }]
+        };
+
+        // Get the canvas element
+        var pieChartCanvas = document.getElementById('pie-chart-canvas').getContext('2d');
+        
+
+        // Create the pie chart
+        var pieChart = new Chart(pieChartCanvas, {
+            type: 'pie',
+            data: pieChartData,
+            options: {
+                maintainAspectRatio: false,
+                responsive: true
+            }
+        });
+
+        // Line graph data
+        var lineGraphData = {
+            labels: ["Sun.Apr.14", "Mon.Apr.15", "Tues.Apr.16", "Weds.Apr.17", "Thrus.Apr.18", "Fri.Apr.19", "Sat.Apr.20"],
+            datasets: [{
+                label: 'Screen Time',
+                data: [179, 148, 320, 222, 166, 215, 240], // Sample data
+                borderColor: 'rgba(255, 163, 206, 1)',
+                borderWidth: 2,
+                fill: true
+            }]
+        };
+
+        // Get the canvas element
+        var lineGraphCanvas = document.getElementById('line-graph-canvas').getContext('2d');
+
+        // Create the line graph
+        var lineGraph = new Chart(lineGraphCanvas, {
+            type: 'line',
+            data: lineGraphData,
+            options: {
+                maintainAspectRatio: false,
+                responsive: true
+            }
+        });
+    </script>
+</body>
+
+</html>
